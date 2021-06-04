@@ -2,7 +2,6 @@ package com.iset.bp.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,7 +18,7 @@ import javax.persistence.Table;
 public class Client implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="CODE_CLI")
+	@Column(name="code_client")
   private Long code;
   private String nom;
   

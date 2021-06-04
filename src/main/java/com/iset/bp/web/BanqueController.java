@@ -15,10 +15,8 @@ import com.iset.bp.metier.IBanqueMetier;
 @Controller
 public class BanqueController {
 
-
 	@Autowired
 	private IBanqueMetier iBanqueMetier;
-
 
    @RequestMapping("/comptes")
    public String index() {
@@ -30,18 +28,19 @@ public class BanqueController {
 		   @RequestParam(name="page",defaultValue="0")int page,
            @RequestParam(name="size",defaultValue="5")int size) {
 
-	  // numcompte = "cpt1";
+	   //numcompte = "cpt1";
 	   
     model.addAttribute("numcompte",numcompte);
     try {
 	Compte cpt =iBanqueMetier.getCompte(numcompte); 
+    
+	model.addAttribute("compte",cpt);
 
    Page<Operation> pageOperations = iBanqueMetier.listOperationCompte(numcompte,page,size);
    model.addAttribute("listOperations",pageOperations.getContent());
    int[] pages=new int[pageOperations.getTotalPages()];
    
     model.addAttribute("pages", pages);
-	model.addAttribute("compte",cpt);
 	
     }catch (Exception e) {
 		model.addAttribute("exception",e);
@@ -67,14 +66,16 @@ public class BanqueController {
 				iBanqueMetier.virement(numcompte,numcompte2,montant);
 				
 			} 
+			
 		}catch (Exception e) {
+			
 			model.addAttribute("error",e);
 			return "redirect:/consultercompte?numcompte="+numcompte+"&error="+e.getMessage();  
+		
 		}
 		 
-		
-		 
-           return "redirect:/consultercompte?numcompte="+numcompte;
+            return "redirect:/consultercompte?numcompte="+numcompte;
+   
    }
 
 } 

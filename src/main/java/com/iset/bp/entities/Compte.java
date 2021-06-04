@@ -16,7 +16,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
  
 
@@ -32,7 +31,7 @@ public class Compte implements Serializable {
 	   private double solde;
 	   
 	   @ManyToOne
-	   @JoinColumn(name="CODE_CLI")
+	   @JoinColumn(name="code_client")
 	   Client client;
 	 
 	@OneToMany(mappedBy="compte")

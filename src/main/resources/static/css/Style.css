@@ -1,0 +1,36 @@
+body{
+   margin-bottom: 40px;
+}
+#Info_Compte{
+	max-width: 100%;
+	top: 33px;
+}
+
+#formulaire1{
+	margin-left:243px;
+}
+
+#codeCompte{
+	color:#17a2b8;
+}
+
+#btnConfirmer{
+	margin-left: 68px;
+}
+
+#titre{
+	font-weight: bold;
+	color: #17a2b8;
+}
+
+#inputCodeCompte{
+	margin-left: 48px;
+}
+
+#radio{
+	margin-left: 85px;
+}
+
+
+
+
