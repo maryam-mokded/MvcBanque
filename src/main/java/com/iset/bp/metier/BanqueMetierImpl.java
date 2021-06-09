@@ -14,6 +14,7 @@ import com.iset.bp.dao.CompteRepository;
 import com.iset.bp.dao.OperationRepository;
 import com.iset.bp.entities.Compte;
 import com.iset.bp.entities.CompteCourant;
+import com.iset.bp.entities.CompteEpargne;
 import com.iset.bp.entities.Operation;
 import com.iset.bp.entities.Retrait;
 import com.iset.bp.entities.Versement;
@@ -57,18 +58,27 @@ public class BanqueMetierImpl implements IBanqueMetier {
 	public void retrait(String codeCompte, double montant) {
 		Compte compte = this.getCompte(codeCompte);
 		double facilitesCaisse = 0;
-		
+		double Solde = 0 ;
 		if (compte instanceof CompteCourant) {
 			facilitesCaisse = ((CompteCourant) compte).getDecouvert();
-			double Solde = compte.getSolde()+facilitesCaisse;
-			if (Solde < montant ) throw new RuntimeException("Solde insuffisant");	
-		}
+			 Solde = compte.getSolde()+facilitesCaisse;
 		
-		Retrait retrait = new Retrait(new Date(), montant,compte);
-		OperationRep.save(retrait);
-		compte.setSolde(compte.getSolde() - montant);
-		CompteRep.save(compte);	
-	}
+		}else if (compte instanceof CompteEpargne) {
+			 Solde = compte.getSolde() ;
+		}
+		 
+		if (Solde > montant ) {
+
+			Retrait retrait = new Retrait(new Date(), montant,compte);
+			OperationRep.save(retrait);
+			compte.setSolde(compte.getSolde() - montant);
+			CompteRep.save(compte);	
+		}else {
+			throw new RuntimeException("Solde insuffisant !!");
+		  }
+		}
+	
+
 	
 
 	public void virement(String codeCompteRetrait, String codeCompteVersement, double montant) {

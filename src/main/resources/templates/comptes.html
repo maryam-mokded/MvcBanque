@@ -90,20 +90,20 @@
 							   name="Operation" 
 							   value="versement"
 							   checked="checked"  
-							   onchange=" document.getElementById('forVirement').style.display='none' " />
+							   onchange=" document.getElementById('ChampsDuVirement').style.display='none' " />
 					    <label>Versement</label>&nbsp&nbsp&nbsp&nbsp
 						<input type="radio" 
 							   name="Operation" 
 							   value="retrait" 
-							   onchange=" document.getElementById('forVirement').style.display='none' " />
+							   onchange=" document.getElementById('ChampsDuVirement').style.display='none' " />
 						<label>Retrait</label>&nbsp&nbsp&nbsp&nbsp
 						<input type="radio" 
 							   name="Operation" 
 							   value="virement" 
-							   onchange=" document.getElementById('forVirement').style.display='block' " />
+							   onchange=" document.getElementById('ChampsDuVirement').style.display='block' " />
 						<label>Virement</label>
 					 </div><br>
-					 <div id="forVirement"  style="display:none">
+					 <div id="ChampsDuVirement"  style="display:none">
 							<label> Vers : </label>
 							<input type="text"  name="numcompte2"  />
 					 </div><br>
@@ -130,11 +130,11 @@
 							<tr>
 								<th>Numéro</th><th>Type</th><th>Date</th><th>Montant</th>
 							</tr>
-							<tr th:each="o:${listOperations}">
-								<td th:text="${o.numoperation}"></td> 
-								<td th:text="${o.class.simpleName}"></td> 
-								<td th:text="${o.dateoperation}"></td> 
-								<td th:text="${o.montant}"></td> 
+							<tr th:each="oper:${listOperations}">
+								<td th:text="${oper.numoperation}"></td> 
+								<td th:text="${oper.class.simpleName}"></td> 
+								<td th:text="${oper.dateoperation}"></td> 
+								<td th:text="${oper.montant}"></td> 
 							</tr>
 		               </table>
 		               
